@@ -7,7 +7,7 @@ const Details = ({ details }) => {
     currency: 'Currency',
     exchange: 'Exchange',
     ipo: 'IPO Date',
-    marketCaptialization: 'Market Capitalization',
+    marketCapitalization: 'Market Capitalization',
     finnhubIndustry: 'Industry',
   };
 
