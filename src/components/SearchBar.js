@@ -32,6 +32,13 @@ const SearchBar = () => {
           <XIcon className='h-4 w-4 mr-2 fill-gray-500' />
         </button>
       )}
+
+      <button
+        onClick={bestMatchesHandler}
+        className='h-8 w-8 bg-indigo-600 rounded-md flex justify-center items-center m-2 p-2'
+      >
+        <SearchIcon className='h-4 w-4 fill-gray-100' />
+      </button>
     </div>
   );
 };
