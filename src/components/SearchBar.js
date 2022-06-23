@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { XIcon, SearchIcon } from '@heroicons/react/solid';
 
+import SearchResults from './SearchResults';
 import { dummySymbolLookupData } from '../constants/dummyData';
 
 const SearchBar = () => {
@@ -39,6 +40,10 @@ const SearchBar = () => {
       >
         <SearchIcon className='h-4 w-4 fill-gray-100' />
       </button>
+
+      {input && bestMatches.length > 0 && (
+        <SearchResults results={bestMatches} />
+      )}
     </div>
   );
 };
