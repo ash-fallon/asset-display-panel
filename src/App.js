@@ -1,5 +1,7 @@
+import MainDisplay from './components/MainDisplay';
+
 const App = () => {
-  return <h1>Hello world</h1>;
+  return <MainDisplay />;
 };
 
 export default App;
