@@ -1,4 +1,5 @@
 import SearchBar from './SearchBar';
+import DarkModeIcon from './DarkModeIcon';
 
 const Header = ({ name }) => {
   return (
@@ -7,6 +8,7 @@ const Header = ({ name }) => {
         <h1 className='text-5xl'>{name}</h1>
         <SearchBar />
       </div>
+      <DarkModeIcon />
     </>
   );
 };
