@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { XIcon, SearchIcon } from '@heroicons/react/solid';
 
 import { dummySymbolLookupData } from '../constants/dummyData';
 
@@ -6,7 +7,7 @@ const SearchBar = () => {
   const [input, setInput] = useState(''); // Tracks search input
   const [bestMatches, setBestMatches] = useState(dummySymbolLookupData.result); // Tracks returned matches from search
 
-  const clear = () => {
+  const clearSearchBarHandler = () => {
     setInput('');
     setBestMatches([]);
   };
@@ -25,6 +26,12 @@ const SearchBar = () => {
         onChange={e => setInput(e.target.value)}
         onKeyDown={e => e.key === 'Enter' && bestMatchesHandler()}
       />
+
+      {input && (
+        <button onClick={clearSearchBarHandler}>
+          <XIcon className='h-4 w-4 mr-2 fill-gray-500' />
+        </button>
+      )}
     </div>
   );
 };
