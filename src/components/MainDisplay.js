@@ -1,6 +1,7 @@
 import Card from './Card';
 import Header from './Header';
 import Details from './Details';
+import Overview from './Overview';
 import { dummyCompanyProfileData } from '../constants/dummyData';
 
 const MainDisplay = () => {
@@ -13,7 +14,13 @@ const MainDisplay = () => {
         <Card>Chart</Card>
       </div>
       <div>
-        <Card>Overview</Card>
+        <Overview
+          symbol={dummyCompanyProfileData.ticker}
+          price={300}
+          change={30}
+          changePercent={10.0}
+          currency={'USD'}
+        ></Overview>
       </div>
       <div className='row-span-2 xl:row-span-3'>
         <Details details={dummyCompanyProfileData} />
