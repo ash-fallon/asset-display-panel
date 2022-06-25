@@ -6,7 +6,7 @@ import ThemeContext from './context/theme-context';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [assetSymbol, setAssetSymbol] = useState('FB');
+  const [assetSymbol, setAssetSymbol] = useState('GOOG');
 
   return (
     <ThemeContext.Provider value={{ darkMode, setDarkMode }}>

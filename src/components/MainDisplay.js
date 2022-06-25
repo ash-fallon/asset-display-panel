@@ -8,7 +8,6 @@ import Chart from './Chart';
 import ThemeContext from './../context/theme-context';
 import AssetContext from './../context/asset-context';
 
-import { dummyCompanyProfileData } from '../constants/dummyData';
 import { fetchAssetDetails, fetchQuote } from '../api/asset-api';
 
 const MainDisplay = () => {
@@ -50,22 +49,22 @@ const MainDisplay = () => {
       }`}
     >
       <div className='col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center'>
-        <Header name={dummyCompanyProfileData.name} />
+        <Header name={assetDetails.name} />
       </div>
       <div className='md:col-span-2 row-span-4'>
         <Chart />
       </div>
       <div>
         <Overview
-          symbol={dummyCompanyProfileData.ticker}
-          price={300}
-          change={30}
-          changePercent={10.0}
-          currency={'USD'}
+          symbol={assetSymbol}
+          price={quote.pc}
+          change={quote.d}
+          changePercent={quote.dp}
+          currency={assetDetails.currency}
         ></Overview>
       </div>
       <div className='row-span-2 xl:row-span-3'>
-        <Details details={dummyCompanyProfileData} />
+        <Details details={assetDetails} />
       </div>
     </div>
   );

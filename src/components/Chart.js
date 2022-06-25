@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {
   AreaChart,
   Area,
@@ -9,10 +9,12 @@ import {
 } from 'recharts';
 
 import { dummyHistoricalData } from '../constants/dummyData';
-import { convertUnixToDate } from '../helpers/date-helper';
+import {
+  convertUnixToDate,
+  convertDateToUnix,
+  createDate,
+} from '../helpers/date-helper';
 import { chartConfig } from './../constants/chartConfig';
-
-import { useContext } from 'react';
 
 import ThemeContext from './../context/theme-context';
 
