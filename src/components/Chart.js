@@ -10,6 +10,7 @@ import {
 
 import { dummyHistoricalData } from '../constants/dummyData';
 import { convertUnixToDate } from '../helpers/date-helper';
+
 import Card from './Card';
 
 const Chart = () => {
