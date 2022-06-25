@@ -1,7 +1,7 @@
-import Card from './Card';
 import Header from './Header';
 import Details from './Details';
 import Overview from './Overview';
+import Chart from './Chart';
 import { dummyCompanyProfileData } from '../constants/dummyData';
 
 const MainDisplay = () => {
@@ -11,7 +11,7 @@ const MainDisplay = () => {
         <Header name={dummyCompanyProfileData.name} />
       </div>
       <div className='md:col-span-2 row-span-4'>
-        <Card>Chart</Card>
+        <Chart />
       </div>
       <div>
         <Overview
