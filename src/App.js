@@ -10,9 +10,9 @@ const App = () => {
 
   return (
     <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-      <AssetContext value={{ assetSymbol, setAssetSymbol }}>
+      <AssetContext.Provider value={{ assetSymbol, setAssetSymbol }}>
         <MainDisplay />
-      </AssetContext>
+      </AssetContext.Provider>
     </ThemeContext.Provider>
   );
 };

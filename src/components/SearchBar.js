@@ -4,11 +4,11 @@ import { XIcon, SearchIcon } from '@heroicons/react/solid';
 import ThemeContext from './../context/theme-context';
 
 import SearchResults from './SearchResults';
-import { dummySymbolLookupData } from '../constants/dummyData';
+import { searchSymbols } from '../api/asset-api';
 
 const SearchBar = () => {
   const [input, setInput] = useState(''); // Tracks search input
-  const [bestMatches, setBestMatches] = useState(dummySymbolLookupData.result); // Tracks returned matches from search
+  const [bestMatches, setBestMatches] = useState([]); // Tracks returned matches from search
 
   const { darkMode } = useContext(ThemeContext);
 
@@ -17,8 +17,17 @@ const SearchBar = () => {
     setBestMatches([]);
   };
 
-  const bestMatchesHandler = () => {
-    setBestMatches(dummySymbolLookupData.result); // Dummy data for testing
+  const bestMatchesHandler = async () => {
+    try {
+      if (input) {
+        const SearchResults = await searchSymbols(input);
+        const result = SearchResults.result;
+        setBestMatches(result);
+      }
+    } catch (error) {
+      setBestMatches([]);
+      console.log(error);
+    }
   };
 
   return (
