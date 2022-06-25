@@ -55,7 +55,7 @@ const SearchBar = () => {
 
       <button
         onClick={bestMatchesHandler}
-        className='h-8 w-8 bg-indigo-600 rounded-md flex justify-center items-center m-2 p-2'
+        className='h-8 w-8 bg-indigo-600 rounded-md flex justify-center items-center m-2 p-2 transition duration-300 hover:ring-2 ring-indigo-400'
       >
         <SearchIcon className='h-4 w-4 fill-gray-100' />
       </button>
