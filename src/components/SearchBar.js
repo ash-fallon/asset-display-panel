@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { XIcon, SearchIcon } from '@heroicons/react/solid';
+
+import ThemeContext from './../context/theme-context';
 
 import SearchResults from './SearchResults';
 import { dummySymbolLookupData } from '../constants/dummyData';
@@ -7,6 +9,8 @@ import { dummySymbolLookupData } from '../constants/dummyData';
 const SearchBar = () => {
   const [input, setInput] = useState(''); // Tracks search input
   const [bestMatches, setBestMatches] = useState(dummySymbolLookupData.result); // Tracks returned matches from search
+
+  const { darkMode } = useContext(ThemeContext);
 
   const clearSearchBarHandler = () => {
     setInput('');
@@ -18,11 +22,17 @@ const SearchBar = () => {
   };
 
   return (
-    <div className='flex items-center my-4 border-2 rounded-md relative z-50 w-96 bg-white border-neutral-200'>
+    <div
+      className={`flex items-center my-4 border-2 rounded-md relative z-50 w-96 ${
+        darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-neutral-200'
+      }`}
+    >
       <input
         type='text'
         value={input}
-        className='w-full px-4 py-2 focus:outline-none rounded-md'
+        className={`w-full px-4 py-2 focus:outline-none rounded-md ${
+          darkMode ? 'bg-gray-900' : null
+        }`}
         placeholder='Search asset...'
         onChange={e => setInput(e.target.value)}
         onKeyDown={e => e.key === 'Enter' && bestMatchesHandler()}
