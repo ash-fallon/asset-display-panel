@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Header from './Header';
 import Details from './Details';
@@ -6,11 +6,42 @@ import Overview from './Overview';
 import Chart from './Chart';
 
 import ThemeContext from './../context/theme-context';
+import AssetContext from './../context/asset-context';
 
 import { dummyCompanyProfileData } from '../constants/dummyData';
+import { fetchAssetDetails, fetchQuote } from '../api/asset-api';
 
 const MainDisplay = () => {
   const { darkMode } = useContext(ThemeContext);
+  const { assetSymbol } = useContext(AssetContext);
+
+  const [assetDetails, setAssetDetails] = useState({});
+  const [quote, setQuote] = useState({});
+
+  useEffect(() => {
+    const updateAssetDetails = async () => {
+      try {
+        const result = await fetchAssetDetails(assetSymbol);
+        setAssetDetails(result);
+      } catch (error) {
+        setAssetDetails({});
+        console.log(error);
+      }
+    };
+
+    const updateAssetOverview = async () => {
+      try {
+        const result = await fetchQuote(assetSymbol);
+        setQuote(result);
+      } catch (error) {
+        setQuote({});
+        console.log(error);
+      }
+    };
+
+    updateAssetDetails();
+    updateAssetOverview();
+  }, [assetSymbol]); // every time the asset symbol changes, like when its clicked in the drop down, the data will update accordingly
 
   return (
     <div
