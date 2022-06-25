@@ -8,7 +8,6 @@ import {
   YAxis,
 } from 'recharts';
 
-import { dummyHistoricalData } from '../constants/dummyData';
 import {
   convertUnixToDate,
   convertDateToUnix,
@@ -24,11 +23,20 @@ import Card from './Card';
 import ChartFilter from './ChartFilter';
 
 const Chart = () => {
-  const [data, setData] = useState(dummyHistoricalData);
-  const [filter, setFilter] = useState('1W');
+  const [data, setData] = useState([]);
+  const [filter, setFilter] = useState('1Y');
 
   const { darkMode } = useContext(ThemeContext);
   const { assetSymbol } = useContext(AssetContext);
+
+  const formatData = data => {
+    return data.c.map((item, index) => {
+      return {
+        value: item.toFixed(2),
+        date: convertUnixToDate(data.t[index]),
+      };
+    });
+  };
 
   useEffect(() => {
     const getDateRange = () => {
@@ -47,17 +55,27 @@ const Chart = () => {
       };
     };
 
-    const updateChartData = async () => {};
-  }, [assetSymbol, filter]);
+    const updateChartData = async () => {
+      try {
+        const { startUnix, endUnix } = getDateRange();
+        const resolution = chartConfig[filter].resolution;
 
-  const formatData = () => {
-    return data.c.map((item, index) => {
-      return {
-        value: item.toFixed(2),
-        date: convertUnixToDate(data.t[index]),
-      };
-    });
-  };
+        const result = await fetchHistoricalData(
+          assetSymbol,
+          resolution,
+          startUnix,
+          endUnix,
+        );
+        console.log(result);
+        setData(formatData(result));
+      } catch (error) {
+        setData([]);
+        console.log(error);
+      }
+    };
+
+    updateChartData();
+  }, [assetSymbol, filter]);
 
   return (
     <Card>
@@ -73,7 +91,7 @@ const Chart = () => {
         ))}
       </ul>
       <ResponsiveContainer>
-        <AreaChart data={formatData(data)}>
+        <AreaChart data={data}>
           <defs>
             <linearGradient id='chartColour' x1='0' y1='0' x2='0' y2='1'>
               <stop

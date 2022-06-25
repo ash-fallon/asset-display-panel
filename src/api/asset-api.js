@@ -42,7 +42,7 @@ export const fetchHistoricalData = async (
   from,
   to,
 ) => {
-  const url = `${basePath}/stock/candle?=${assetSymbol}&resolution=${resolution}&from=${from}&to=${to}&token=${process.env.REACT_APP_API_KEY}`;
+  const url = `${basePath}/stock/candle?symbol=${assetSymbol}&resolution=${resolution}&from=${from}&to=${to}&token=${process.env.REACT_APP_API_KEY}`;
   const response = await fetch(url);
 
   if (!response.ok) {
