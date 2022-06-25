@@ -15,17 +15,40 @@ import {
   createDate,
 } from '../helpers/date-helper';
 import { chartConfig } from './../constants/chartConfig';
+import { fetchHistoricalData } from '../api/asset-api';
 
 import ThemeContext from './../context/theme-context';
+import AssetContext from '../context/asset-context';
 
 import Card from './Card';
 import ChartFilter from './ChartFilter';
 
 const Chart = () => {
-  const { darkMode } = useContext(ThemeContext);
-
   const [data, setData] = useState(dummyHistoricalData);
   const [filter, setFilter] = useState('1W');
+
+  const { darkMode } = useContext(ThemeContext);
+  const { assetSymbol } = useContext(AssetContext);
+
+  useEffect(() => {
+    const getDateRange = () => {
+      // finds timestamps
+      const { days, weeks, months, years } = chartConfig[filter];
+
+      const endDate = new Date();
+      const startDate = createDate(endDate, -days, -weeks, -months, -years);
+
+      const startUnix = convertDateToUnix(startDate);
+      const endUnix = convertDateToUnix(endDate);
+
+      return {
+        startUnix,
+        endUnix,
+      };
+    };
+
+    const updateChartData = async () => {};
+  }, [assetSymbol, filter]);
 
   const formatData = () => {
     return data.c.map((item, index) => {
